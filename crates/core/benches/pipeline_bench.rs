@@ -1,6 +1,8 @@
 //! Criterion microbenchmarks for the pipeline's CPU hot paths: enrichment and aggregation.
 //!
 //! Run: `cargo bench -p paystream-core`
+// Money literals use a deliberate `<major>_<cents>` grouping (e.g. 1_000_00 == 1000.00).
+#![allow(clippy::inconsistent_digit_grouping)]
 
 use chrono::Utc;
 use criterion::{criterion_group, criterion_main, Criterion};
