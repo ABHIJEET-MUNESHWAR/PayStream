@@ -1,0 +1,26 @@
+[package]
+name = "paystream-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+paystream-types.workspace = true
+paystream-resilience.workspace = true
+tokio.workspace = true
+tokio-util = { workspace = true }
+futures.workspace = true
+async-trait.workspace = true
+tracing.workspace = true
+parking_lot.workspace = true
+chrono.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+uuid.workspace = true
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "pipeline_bench"
+harness = false

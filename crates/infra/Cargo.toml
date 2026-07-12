@@ -1,0 +1,27 @@
+[package]
+name = "paystream-infra"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+paystream-types.workspace = true
+paystream-core.workspace = true
+paystream-resilience.workspace = true
+tokio.workspace = true
+async-trait.workspace = true
+tracing.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+parking_lot.workspace = true
+metrics.workspace = true
+metrics-exporter-prometheus.workspace = true
+# Pure-Rust Kafka protocol client (rdkafka is a production-swappable alternative behind the ports).
+# Compression features are disabled to avoid native C builds; NoCompression is used on the wire.
+rskafka.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+uuid.workspace = true

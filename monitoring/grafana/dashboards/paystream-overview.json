@@ -1,0 +1,46 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "graphTooltip": 0,
+  "title": "PayStream — Stream Overview",
+  "uid": "paystream-overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "10s",
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Events consumed / published per second",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        { "expr": "rate(paystream_events_consumed_total[1m])", "legendFormat": "consumed/s" },
+        { "expr": "rate(paystream_events_published_total[1m])", "legendFormat": "published/s" }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Publish failures per second",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        { "expr": "rate(paystream_events_publish_failed_total[1m])", "legendFormat": "failed/s" }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Total events consumed",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [{ "expr": "paystream_events_consumed_total" }]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Total events published",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [{ "expr": "paystream_events_published_total" }]
+    }
+  ]
+}

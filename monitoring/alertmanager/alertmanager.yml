@@ -1,0 +1,17 @@
+route:
+  receiver: default
+  group_by: ["alertname", "severity"]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h
+
+receivers:
+  - name: default
+    webhook_configs:
+      - url: "http://localhost:5001/alerts"
+        send_resolved: true
+
+inhibit_rules:
+  - source_matchers: ["severity=critical"]
+    target_matchers: ["severity=warning"]
+    equal: ["alertname"]

@@ -1,0 +1,51 @@
+{
+  "info": {
+    "name": "PayStream",
+    "description": "GraphQL + metrics API for the PayStream Kafka stream processor. Set {{baseUrl}} (default http://localhost:8082).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:8082" }],
+  "item": [
+    {
+      "name": "Query / aggregates",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\n  health\n  aggregates {\n    totalProcessed\n    maxRiskScore\n    byStatus { status count }\n    byDirection { direction count }\n    settled { currency settledMinorUnits }\n  }\n}",
+            "variables": "{}"
+          }
+        }
+      }
+    },
+    {
+      "name": "Query / health only",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+        "body": {
+          "mode": "graphql",
+          "graphql": { "query": "query { health }", "variables": "{}" }
+        }
+      }
+    },
+    {
+      "name": "GET / health",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] }
+      }
+    },
+    {
+      "name": "GET / metrics (Prometheus)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/metrics", "host": ["{{baseUrl}}"], "path": ["metrics"] }
+      }
+    }
+  ]
+}

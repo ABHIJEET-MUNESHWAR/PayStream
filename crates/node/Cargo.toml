@@ -1,0 +1,23 @@
+[package]
+name = "paystream-node"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+default-run = "paystream-node"
+
+[[bin]]
+name = "paystream-node"
+path = "src/main.rs"
+
+[dependencies]
+paystream-types.workspace = true
+paystream-core.workspace = true
+paystream-infra.workspace = true
+paystream-api.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+axum.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+anyhow.workspace = true

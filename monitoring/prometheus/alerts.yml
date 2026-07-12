@@ -1,0 +1,26 @@
+groups:
+  - name: paystream-slo
+    rules:
+      - alert: PayStreamInstanceDown
+        expr: up{job="paystream"} == 0
+        for: 1m
+        labels: { severity: critical }
+        annotations:
+          summary: "PayStream instance is down"
+          description: "No Prometheus scrape from PayStream for over 1 minute."
+
+      - alert: PublishFailuresElevated
+        expr: rate(paystream_events_publish_failed_total[5m]) > 1
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "Enriched-event publish failures are elevated"
+          description: "PayStream is failing to publish enriched events to Kafka (>1/s over 5m)."
+
+      - alert: ConsumerStalled
+        expr: rate(paystream_events_consumed_total[5m]) == 0
+        for: 10m
+        labels: { severity: warning }
+        annotations:
+          summary: "PayStream is not consuming events"
+          description: "No events consumed for 10 minutes — check the input topic and broker."
